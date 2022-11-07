@@ -1,0 +1,1 @@
+export const DATABASE_HOST = 'DATABASE_HOST';
