@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>warning</mat-icon>
+      <mat-label>{{ title }}</mat-label>
+    </mat-card-title>
+    <div class="btn-close"><mat-icon (click)="onClose()">close</mat-icon></div>
+  </mat-card-header>
+  <ng-container class="body-content">
+    <mat-card-content>
+      <p class="stylePCenter">
+        ¿Esta seguro que desea <strong>{{ msj }}</strong> al estudiante?
+      </p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-stroked-button
+        type="submit"
+        color="primary"
+        (click)="evaluationMethod()"
+      >
+        {{ btnName }}
+      </button>
+    </mat-card-actions>
+  </ng-container>
+</mat-card>

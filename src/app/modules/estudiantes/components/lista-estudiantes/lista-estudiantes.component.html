@@ -1,0 +1,158 @@
+<div class="styleApp">
+  <div class="container-button">
+    <div class="button-left">
+      <button
+        color="primary"
+        mat-stroked-button
+        class="btn-register-student"
+        (click)="onChangeView(false)"
+      >
+        <mat-icon matSuffix>account_box</mat-icon>
+        Registrar Estudiante
+      </button>
+    </div>
+  </div>
+
+  <div class="container-border">
+    <div class="container-table">
+      <table mat-table [dataSource]="dataSource">
+        <!-- fullName -->
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef sticky>Estudiante</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{ 'item-deactive': !element.status }"
+          >
+            {{ element.first_name + " - " + element.last_name }}
+          </td>
+        </ng-container>
+        <!-- fullName -->
+
+        <!-- grade -->
+        <ng-container matColumnDef="grade">
+          <th mat-header-cell *matHeaderCellDef sticky>Grado</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{ 'item-deactive': !element.status }"
+          >
+            {{ element.lv_id?.name }}
+          </td>
+        </ng-container>
+        <!-- grade -->
+
+        <!-- group -->
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef sticky>Grupo</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{ 'item-deactive': !element.status }"
+          >
+            {{ element.group }}
+          </td>
+        </ng-container>
+        <!-- group -->
+
+        <!-- email -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef sticky>Email</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{ 'item-deactive': !element.status }"
+          >
+            {{ element.email }}
+          </td>
+        </ng-container>
+        <!-- email -->
+
+        <!-- phone -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef sticky>Télefono</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{ 'item-deactive': !element.status }"
+          >
+            {{ element.phone_number }}
+          </td>
+        </ng-container>
+        <!-- phone -->
+
+        <!-- Opciones -->
+        <ng-container matColumnDef="opciones">
+          <th mat-header-cell *matHeaderCellDef sticky>Opciones</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <!-- Editar -->
+            <mat-icon
+              class="table-icon-green"
+              aria-hidden="false"
+              title="Editar Paciente"
+              (click)="onChangeView(true, element)"
+              >edit</mat-icon
+            >
+            <!-- Editar -->
+
+            <!-- Estado -->
+            <mat-icon
+              class="table-icon-deactive"
+              aria-hidden="desactivar"
+              title="Desactivar Paciente"
+              *ngIf="element.status"
+              (click)="openChangeState(element, 'desactivar')"
+              >close</mat-icon
+            >
+            <!-- Estado -->
+
+            <!-- Estado -->
+            <mat-icon
+              class="table-icon-active"
+              aria-hidden="activar"
+              title="Activar Paciente"
+              *ngIf="!element.status"
+              (click)="openChangeState(element, 'activar')"
+              >done</mat-icon
+            >
+            <!-- Estado -->
+
+            <!-- cursos -->
+            <mat-icon
+              class="table-icon-active"
+              aria-hidden="Ver Cursos"
+              title="Ver Cursos"
+              (click)="openViewCourse(element._id)"
+              >book</mat-icon
+            >
+            <!-- cursos -->
+
+            <!-- Agregar cursos -->
+            <mat-icon
+              class="table-icon-green"
+              aria-hidden="false"
+              title="Asignar Curso"
+              (click)="openCreateCourse(element)"
+              >note_add</mat-icon
+            >
+            <!-- Agregar cursos -->
+          </td>
+        </ng-container>
+        <!-- Opciones -->
+
+        <!-- Config Table -->
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <!-- Config Table -->
+      </table>
+    </div>
+  </div>
+
+  <app-custom-paginator
+    (changeEvent)="getStudent()"
+    [totalRecords]="totalRecords"
+  ></app-custom-paginator>
+</div>

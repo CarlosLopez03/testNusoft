@@ -1,0 +1,292 @@
+<div class="styleApp">
+  <div class="border">
+    <form [formGroup]="formStudent" autocomplete="off" class="styleForm">
+      <mat-accordion class="style-showFiend">
+        <!-- profile -->
+        <div class="border-show">
+          <mat-expansion-panel
+            [expanded]="step === 0"
+            (opened)="setStep(0)"
+            hideToggle
+          >
+            <!-- title -->
+            <mat-expansion-panel-header>
+              <mat-panel-title
+                [ngClass]="{
+                  'color-icon-title': formStudent.get('perfil')?.valid,
+                  colorDefault: !formStudent.get('perfil')?.valid
+                }"
+                >Perfil</mat-panel-title
+              >
+              <mat-icon
+                [ngClass]="{
+                  'color-icon-title': formStudent.get('perfil')?.valid,
+                  colorDefault: !formStudent.get('perfil')?.valid
+                }"
+                >label_important</mat-icon
+              >
+            </mat-expansion-panel-header>
+            <!-- title -->
+
+            <!-- FormGroup -->
+            <div formGroupName="perfil" autocomplete="off">
+              <div class="styleDivContainer">
+                <!-- first_name -->
+                <mat-form-field class="example-medium-width">
+                  <mat-label>Nombre</mat-label>
+                  <input
+                    matInput
+                    formControlName="first_name"
+                    [(ngModel)]="student.first_name"
+                    name="first_name"
+                    required
+                  />
+                  <mat-icon matSuffix class="color-icon"
+                    >perm_identity</mat-icon
+                  >
+                  <mat-error
+                    class="example-error"
+                    *ngIf="
+                      !formStudent.get('perfil.first_name')?.valid &&
+                      formStudent.get('perfil.first_name')?.touched
+                    "
+                    >Verificar los datos: es un campo requerido y la cantidad
+                    máxima de caracteres es de 50</mat-error
+                  >
+                </mat-form-field>
+                <!-- first_name -->
+
+                <!-- last_name -->
+                <mat-form-field class="example-medium-width">
+                  <mat-label>Apellido</mat-label>
+                  <input
+                    matInput
+                    formControlName="last_name"
+                    name="last_name"
+                    [(ngModel)]="student.last_name"
+                    required
+                  />
+                  <mat-icon matSuffix class="color-icon"
+                    >perm_identity</mat-icon
+                  >
+                  <mat-error
+                    class="example-error"
+                    *ngIf="
+                      !formStudent.get('perfil.last_name')?.valid &&
+                      formStudent.get('perfil.last_name')?.touched
+                    "
+                    >Verificar los datos: es un campo requerido y la cantidad
+                    máxima de caracteres es de 50</mat-error
+                  >
+                </mat-form-field>
+                <!-- last_name -->
+              </div>
+
+              <mat-action-row>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  (click)="nextStep()"
+                  color="primary"
+                >
+                  Siguiente
+                </button>
+              </mat-action-row>
+            </div>
+            <!-- FormGroup -->
+          </mat-expansion-panel>
+        </div>
+        <!-- profile -->
+
+        <!-- study -->
+        <div class="border-show">
+          <mat-expansion-panel
+            [expanded]="step === 1"
+            (opened)="setStep(1)"
+            hideToggle
+          >
+            <!-- title -->
+            <mat-expansion-panel-header>
+              <mat-panel-title
+                [ngClass]="{
+                  'color-icon-title': formStudent.get('estudio')?.valid,
+                  colorDefault: !formStudent.get('estudio')?.valid
+                }"
+                >Estudio</mat-panel-title
+              >
+              <mat-icon
+                [ngClass]="{
+                  'color-icon-title': formStudent.get('estudio')?.valid,
+                  colorDefault: !formStudent.get('estudio')?.valid
+                }"
+                >label_important</mat-icon
+              >
+            </mat-expansion-panel-header>
+            <!-- title -->
+
+            <!-- FormGroup -->
+            <div formGroupName="estudio" autocomplete="off">
+              <div class="styleDivContainer">
+                <!-- first_name -->
+                <mat-form-field class="example-medium-width">
+                  <mat-label>Grado o Nível</mat-label>
+                  <mat-select
+                    formControlName="lv_id"
+                    name="lv_id"
+                    [(ngModel)]="student.lv_id!.name"
+                    [disableOptionCentering]="true"
+                    ><mat-option
+                      *ngFor="let item of listGradeOrLevel"
+                      [value]="item.name"
+                      >{{ item.name }}</mat-option
+                    ></mat-select
+                  >
+                </mat-form-field>
+                <!-- first_name -->
+
+                <!-- last_name -->
+                <mat-form-field class="example-medium-width">
+                  <mat-label>Grupo</mat-label>
+                  <mat-select
+                    formControlName="group"
+                    name="group"
+                    [(ngModel)]="student.group"
+                    [disableOptionCentering]="true"
+                    ><mat-option
+                      *ngFor="let item of listGroup"
+                      [value]="item.group"
+                      >{{ item.group }}</mat-option
+                    ></mat-select
+                  >
+                </mat-form-field>
+                <!-- last_name -->
+              </div>
+
+              <mat-action-row>
+                <button mat-stroked-button color="warn" (click)="prevStep()">
+                  Anterior
+                </button>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  (click)="nextStep()"
+                  color="primary"
+                >
+                  Siguiente
+                </button>
+              </mat-action-row>
+            </div>
+            <!-- FormGroup -->
+          </mat-expansion-panel>
+        </div>
+        <!-- study -->
+
+        <!-- contact -->
+        <div class="border-show">
+          <mat-expansion-panel
+            [expanded]="step === 2"
+            (opened)="setStep(2)"
+            hideToggle
+          >
+            <!-- title -->
+            <mat-expansion-panel-header>
+              <mat-panel-title
+                [ngClass]="{
+                  'color-icon-title': formStudent.get('contacto')?.valid,
+                  colorDefault: !formStudent.get('contacto')?.valid
+                }"
+                >Contacto</mat-panel-title
+              >
+              <mat-icon
+                [ngClass]="{
+                  'color-icon-title': formStudent.get('contacto')?.valid,
+                  colorDefault: !formStudent.get('contacto')?.valid
+                }"
+                >perm_contact_calendar</mat-icon
+              >
+            </mat-expansion-panel-header>
+            <!-- title -->
+
+            <!-- FormGroup -->
+            <div formGroupName="contacto" autocomplete="off">
+              <div class="styleDivContainer">
+                <!-- email -->
+                <mat-form-field class="example-medium-width">
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    formControlName="email"
+                    [(ngModel)]="student.email"
+                    name="email"
+                    required
+                  />
+                  <mat-icon matSuffix class="color-icon">email</mat-icon>
+                  <mat-error
+                    class="example-error"
+                    *ngIf="
+                      !formStudent.get('contacto.email')?.valid &&
+                      formStudent.get('contacto.email')?.touched
+                    "
+                    >Verificar los datos: es un campo requerido que debe cumplir
+                    con los estandares de un email y la cantidad máxima de
+                    caracteres es de 100</mat-error
+                  >
+                </mat-form-field>
+                <!-- email -->
+
+                <!-- phone_number -->
+                <mat-form-field class="example-medium-width">
+                  <mat-label>Télefono</mat-label>
+                  <input
+                    matInput
+                    formControlName="phone_number"
+                    name="phone_number"
+                    [(ngModel)]="student.phone_number"
+                    required
+                  />
+                  <mat-icon matSuffix class="color-icon"
+                    >contact_phone</mat-icon
+                  >
+                  <mat-error
+                    class="example-error"
+                    *ngIf="
+                      !formStudent.get('contacto.phone_number')?.valid &&
+                      formStudent.get('contacto.phone_number')?.touched
+                    "
+                    >Verificar los datos: es un campo requerido y la cantidad
+                    máxima de caracteres es de 50</mat-error
+                  >
+                </mat-form-field>
+                <!-- phone_number -->
+              </div>
+
+              <mat-action-row>
+                <button mat-stroked-button color="warn" (click)="prevStep()">
+                  Anterior
+                </button>
+              </mat-action-row>
+            </div>
+            <!-- FormGroup -->
+          </mat-expansion-panel>
+        </div>
+        <!-- contact -->
+      </mat-accordion>
+    </form>
+  </div>
+
+  <!-- buttons -->
+  <mat-action-row>
+    <button mat-stroked-button color="warn" (click)="cancelAction()">
+      Cancelar
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="validateActionMethod()"
+      [disabled]="formStudent.invalid"
+    >
+      Guardar
+    </button>
+  </mat-action-row>
+  <!-- buttons -->
+</div>

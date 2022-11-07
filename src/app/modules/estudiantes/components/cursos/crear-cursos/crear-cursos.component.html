@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-label>Asignar curso ha: {{ data.fullName }}</mat-label>
+    </mat-card-title>
+    <div class="bnt-close"><mat-icon (click)="onClose()">close</mat-icon></div>
+  </mat-card-header>
+  <ng-container class="body-content">
+    <mat-card-content>
+      <div>
+        <h2 class="styleCenter">Seleccione el curso a asignar</h2>
+      </div>
+
+      <form [formGroup]="formCourse" autocomplete="off">
+        <mat-form-field class="example-full-width">
+          <mat-label>Curso</mat-label>
+          <mat-select
+            formControlName="course"
+            name="course"
+            [disableOptionCentering]="true"
+            ><mat-option *ngFor="let item of listGroup" [value]="item">{{
+              item.name
+            }}</mat-option></mat-select
+          >
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-stroked-button
+        type="submit"
+        color="primary"
+        (click)="onClose()"
+      >
+        Cerrar
+      </button>
+      <button
+        mat-stroked-button
+        type="submit"
+        color="primary"
+        (click)="createCourse()"
+      >
+        Guardar
+      </button>
+    </mat-card-actions>
+  </ng-container>
+</mat-card>
